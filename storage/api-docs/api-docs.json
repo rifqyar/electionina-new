@@ -1,0 +1,386 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/loginmobile": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/uploadimage": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Upload Image",
+                "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_user": {
+                                        "type": "integer",
+                                        "format": "number",
+                                        "example": "1"
+                                    },
+                                    "id_tps": {
+                                        "type": "integer",
+                                        "format": "number",
+                                        "example": "1"
+                                    },
+                                    "photos": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "photo": {
+                                                    "type": "string",
+                                                    "format": "base64-encoded-string"
+                                                },
+                                                "filename": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "photo",
+                                                "filename"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Upload image"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/dapil": {
+            "get": {
+              "tags": ["Dapil"],
+              "summary": "Get Dapil",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Dapil data"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+        },
+        "/api/kota": {
+            "get": {
+              "tags": ["Dapil"],
+              "summary": "Get kota",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Kota data"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+        },
+        "/api/kecamatan/{id_user}": {
+            "get": {
+              "tags": ["Kecamatan"],
+              "summary": "Get Kecamatan by ID User",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "parameters": [
+                {
+                  "name": "id_user",
+                  "in": "path",
+                  "description": "ID User",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Kecamatan data by ID User"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+          },
+          "/api/desa/{id_user}": {
+            "get": {
+              "tags": ["Desa"],
+              "summary": "Get Desa by ID User",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "parameters": [
+                {
+                  "name": "id_user",
+                  "in": "path",
+                  "description": "ID User",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Kecamatan data by ID User"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+          },
+          "/api/rtrw/{id_user}": {
+            "get": {
+              "tags": ["Rt RW"],
+              "summary": "Get Rt Rw by ID User",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "parameters": [
+                {
+                  "name": "id_user",
+                  "in": "path",
+                  "description": "ID User",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Kecamatan data by ID User"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+          },
+
+          "/api/tps/{id_user}": {
+            "get": {
+              "tags": ["Tps"],
+              "summary": "Get tps by ID User",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "parameters": [
+                {
+                  "name": "id_user",
+                  "in": "path",
+                  "description": "ID User",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval of Kecamatan data by ID User"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              }
+            }
+          },
+
+        "/api/insertDetailDapil": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Create Detail Dapil",
+                "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_dapil",
+                                    "id_camat"
+                                ],
+                                "properties": {
+                                  "id_user": {
+                                    "type": "string",
+                                    "format": "string",
+                                    "example": ""
+                                    },
+                                    "id_dapil": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": ""
+                                    },
+                                    "id_camat": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": ""
+                                    },
+                                    "id_desa": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": ""
+                                    },
+                                    "id_rtrw": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": ""
+                                    },
+                                    "id_tps": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Insert Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/candidates": {
+          "get": {
+            "tags": ["candidates"],
+            "summary": "Get candidates",
+            "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+            "responses": {
+              "200": {
+                "description": "Successful retrieval of candidates data"
+              },
+              "401": {
+                "description": "Unauthorized"
+              }
+            }
+          }
+        },
+        "/api/vote": {
+          "post": {
+              "tags": [
+                  "Authentication"
+              ],
+              "summary": "Create Detail Dapil",
+              "operationId": "8eb4b6165db3b40e63a701aeca15a5b6",
+              "requestBody": {
+                  "required": true,
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "required": [
+                                  "id",
+                                  "suara",
+                                  "iddapil",
+                                  "idtps",
+                                  "iduser"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "format": "string",
+                                  "example": ""
+                                  },
+                                "suara": {
+                                    "type": "string",
+                                    "format": "string",
+                                    "example": ""
+                                },
+                                "iddapil": {
+                                  "type": "string",
+                                  "format": "string",
+                                  "example": ""
+                                },
+                                "idtps": {
+                                  "type": "string",
+                                  "format": "string",
+                                  "example": ""
+                                },
+                                "iduser": {
+                                  "type": "string",
+                                  "format": "string",
+                                  "example": ""
+                                }
+                                  
+                              },
+                              "type": "object"
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Successful Insert Data"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  }
+              }
+          }
+        }
+    }
+}
