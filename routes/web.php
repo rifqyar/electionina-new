@@ -29,7 +29,8 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Route::post('/load-chart-data', [HomeController::class, 'loadChartData'])->name('load-chart-data');
 Route::get('/load-chart-data', [HomeController::class, 'loadChartData']);
-Route::get('/get-tps', [HomeController::class, 'getTpsByDesa']);
+Route::get('/get-desa', [HomeController::class, 'getTpsByDesa']);
+Route::get('/get-tps', [HomeController::class, 'getTpsByTps']);
 
 
 //Master calculate
@@ -74,7 +75,7 @@ Route::post('usermobile/create', [UserMobilelController::class, 'create'])->name
 Route::post('usermobile/update', [UserMobilelController::class, 'update'])->name('usermobile.update');
 
 
-//Master Partai
+//Vote
 Route::get('votecaleg', [VoteCalculateController::class, 'index'])->name('votecaleg');
 Route::post('votecaleg/create', [VoteCalculateController::class, 'create'])->name('votecaleg.create');
 Route::post('votecaleg/update', [VoteCalculateController::class, 'update'])->name('votecaleg.update');

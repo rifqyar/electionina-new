@@ -21,23 +21,18 @@
                                         <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                                             <div class="form-group">
                                                 @foreach ($kecamatan as $valcamat)
-                                                    <input hidden value="{{ $valcamat->idcamat }}" id="kecamatan_id" name="kecamatan_id">
+                                                   
                                                     <h6 class="mb-0 ms-3">Provinsi : {{ $valcamat->provinsi }}</h6>
                                                     <h6 class="mb-0 ms-3">Kota : {{ $valcamat->kota_kabupaten }}</h6>
-                                                    <h6 class="mb-0 ms-3">Kecamatan : {{ $valcamat->namacamat }}</h6>
                                                 @endforeach
-                                                    {{-- <select class="choices form-select" name="kecamatan_id" id="kecamatan_id">
-                                                        <option value="square">Pilih Dapil</option>
-                                                        @foreach ($kecamatan as $valcamat)
-                                                            <option value="{{ $valcamat->idcamat }}">{{ $valcamat->provinsi }}-{{ $valcamat->kota_kabupaten }}-{{ $valcamat->namacamat }}</option>
-                                                        @endforeach
-                                                    </select> --}}
+                                                    
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-6 col-lg-2 col-md-4">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
@@ -59,6 +54,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6 col-lg-2 col-md-4" >
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <h3 class="text-muted font-semibold">KECAMATAN</h3>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="form-group">
+                                                  <select class="choices form-select" name="kecamatan_id" id="kecamatan_id">
+                                                        <option value="square">Pilih Kecmatan</option>
+                                                        @foreach ($kecamatanList as $valcamatList)
+                                                            <option value="{{ $valcamatList->idcamat }}">{{ $valcamatList->namacamat }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-6 col-lg-2 col-md-4">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
@@ -70,9 +87,9 @@
                                             <div class="form-group">
                                                 <select class="choices form-select" id="selectDesa" name="selectDesa">
                                                     <option value="square">Pilih Desa</option>
-                                                    @foreach ($desa as $valdesa)
+                                                    {{-- @foreach ($desa as $valdesa)
                                                         <option value="{{ $valdesa->iddesa }}">{{ $valdesa->namadesa }} </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -119,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-4 ">
+                        <div class="col-6 col-lg-2 col-md-4 " hidden>
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -190,6 +207,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
+        $('#kecamatan_id').on('change', function() {
+            var kecamatan_id = $(this).val();
+            $('#selectDesa').empty();
+            $('#selectDesa').append($('<option>', {
+                value: 'square',
+                text: 'Pilih Desa'
+            }));
+            $.ajax({
+                url: '/get-desa', // Ganti dengan URL Anda
+                type: 'GET',
+                data: {
+                    kecamatan: kecamatan_id
+                },
+                success: function(response) {
+                    var desa = response.desa;
+                    $.each(desa, function(key, value) {
+                        $('#selectDesa').append($('<option>', {
+                            value: value.iddesa,
+                            text: value.namadesa
+                        }));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
         $('#selectDesa').on('change', function() {
             var selectedDesa = $(this).val();
             $('#selectTps').empty();
@@ -201,7 +249,7 @@
                 url: '/get-tps', // Ganti dengan URL Anda
                 type: 'GET',
                 data: {
-                    iddesa: selectedDesa
+                    idtps: selectedDesa
                 },
                 success: function(response) {
                     var tps = response.tps;

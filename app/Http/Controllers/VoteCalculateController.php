@@ -42,13 +42,13 @@ class VoteCalculateController extends Controller
         ->join('desa as c', 'c.id_kecamatan', '=', 'b.id')
         ->join('rtrw as d', 'd.id_desa', '=', 'c.id')
         ->join('tps as e', 'e.id_rtrw', '=', 'd.id')
-        ->join('detail_dapil as f', 'f.id_tps', '=', 'e.id_tps')
-        ->join('calculate as g', 'g.id_dtl', '=', 'f.id_dtl')
+        //->join('detail_dapil as f', 'f.id_tps', '=', 'e.id_tps')
+        ->join('calculate as g', 'g.id_tps', '=', 'e.id_tps')
         ->join('caleg as h', 'h.id_caleg', '=', 'g.id_caleg') 
         ->join('partai as i', 'i.id_partai', '=', 'h.id_partai')
         // ->join('detail_dapil as h_detail', 'h_detail.id_kecamatan', '=', 'b.id')
-        ->selectRaw('i.name_partai,h.name_caleg,SUM(g.totalsuara_caleg) as total_suara,e.name_tps,c.nama_desa,b.nama_kecamatan')
-        ->groupBy('i.name_partai','h.name_caleg','e.name_tps','c.nama_desa','b.nama_kecamatan');
+        ->selectRaw('i.name_partai,h.name_caleg,SUM(g.totalsuara_caleg) as total_suara,e.name_tps,c.nama_desa,b.nama_kecamatan,d.namertrw')
+        ->groupBy('i.name_partai','h.name_caleg','e.name_tps','c.nama_desa','b.nama_kecamatan','d.namertrw');
         $results = $query->get();
         return view('vote.index', compact('results','status','partai','partai','caleg','dapil','camat','desa','rtrw','tps'));
     }
@@ -76,8 +76,7 @@ class VoteCalculateController extends Controller
     {
         try {
             
-            DB::beginTransaction();   
-
+            DB::beginTransaction();
             $detailDapil = DetailDapilModel::create([
                 'id_user' => Auth::user()->id,
                 'id_tps' => $request->selectTps,
@@ -94,6 +93,9 @@ class VoteCalculateController extends Controller
                 'id_tps' => $request->selectTps,
                 'id_user' => Auth::user()->id,
                 'id_caleg' => $request->caleg,
+                'id_desa' => $request->selectDesa,
+                'id_dapil' => $request->iddapil,
+                'id_kecamatan' => $request->camatx,
                 'totalsuara_caleg' => $request->suaracaleg,
             ]);
              

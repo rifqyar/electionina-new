@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    HOME
+    Vote
    
 @endsection
 
@@ -38,9 +38,6 @@
                         Data Vote Caleg
                     </div>
                     <div class="card-header">
-                        Data Vote Caleg
-                    </div>
-                    <div class="card-header">
                         <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
                             data-bs-target="#inlineForm">
                             Tambah
@@ -66,6 +63,7 @@
                                     <th>Nama Caleg</th>
                                     <th>Kecamatan</th>
                                     <th>Desa</th>
+                                    <th>RT/RW</th>
                                     <th>TPS</th>
                                     <th>Total Suara</th>
                                 </tr>
@@ -77,6 +75,7 @@
                                         <td>{{ $header->name_caleg }}</td>
                                         <td>{{ $header->nama_kecamatan }}</td>
                                         <td>{{ $header->nama_desa }}</td>
+                                        <td>{{ $header->namertrw }}</td>
                                         <td>{{ $header->name_tps }}</td>
                                         <td>{{ $header->total_suara }}</td>
                                         
@@ -107,6 +106,7 @@
                                 <div class="form-group">
                                     <label>Pilih Partai </label>
                                     <select class="choices form-select" id="idpartaix" name="idpartaix">
+                                        <option>Pilih Partai</option>
                                         @foreach ($partai as $valsp)
                                             <option value="{{ $valsp->idpartai }}">{{ $valsp->name_partai }}</option>
                                         @endforeach
@@ -122,6 +122,7 @@
                                 <div class="form-group">
                                     <label>Provinsi </label>
                                     <select class="choices form-select" id="iddapil" name="iddapil" @readonly(true)>
+                                        <option>Pilih Dapil</option>
                                         @foreach ($dapil as $valsdp)
                                             <option value="{{ $valsdp->iddapil }}">{{ $valsdp->provinsi }}</option>
                                         @endforeach
@@ -129,7 +130,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kota/Kabupaten </label>
-                                    
+
                                         @foreach ($dapil as $valskk)
                                             <input type="text" value="{{ $valskk->kota_kabupaten }}" class="form-control" readonly>
                                         @endforeach
@@ -137,6 +138,7 @@
                                 <div class="form-group">
                                     <label>Pilih Kecamatan</label>
                                     <select class="choices form-select" id="camatx" name="camatx">
+                                        <option>Pilih Kecamatan</option>
                                         @foreach ($camat as $vacmtl)
                                             <option value="{{ $vacmtl->camatid }}">{{ $vacmtl->nama_kecamatan }}</option>
                                         @endforeach
@@ -145,6 +147,7 @@
                                 <div class="form-group">
                                     <label>Pilih Desa</label>
                                     <select class="choices form-select" id="selectDesa" name="selectDesa">
+                                        <option>Pilih Desa</option>
                                         @foreach ($desa as $valdesa)
                                             <option value="{{ $valdesa->desaid }}">{{ $valdesa->nama_desa }}</option>
                                         @endforeach
@@ -153,12 +156,14 @@
                                 <div class="form-group">
                                     <label>Pilih Tps</label>
                                     <select class="choices form-select" id="selectTps" name="selectTps">
+                                        <option>Pilih Tps</option>
                                         <option value="square">Pilih Tps</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Pilih Caleg</label>
                                     <select class="choices form-select" id="caleg" name="caleg">
+                                        <option>Pilih Caleg</option>
                                         @foreach ($caleg as $valcaleg)
                                             <option value="{{ $valcaleg->id_caleg }}">{{ $valcaleg->name_caleg }}</option>
                                         @endforeach
@@ -240,6 +245,10 @@
 @push('after-script')
 <script src="{{'assets/extensions/choices.js/public/assets/scripts/choices.js'}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+<script src="assets/js/pages/datatables.js"></script>
+{{-- <script src="assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+<script src="assets/js/pages/form-element-select.js"></script> --}}
 <script>
     $(document).ready(function() {
         $('#selectDesa').on('change', function() {
