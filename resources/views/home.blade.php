@@ -298,7 +298,7 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 console.error(error);
             // Tampilkan modal pesan kesalahan
-                $('#modalMessage').text("Terjadi kesalahan saat memuat data.");
+                $('#modalMessage').text("Terjadi  kesalahan saat memuat data.");
                 $('#dataModal').modal('show');
             }
         });
