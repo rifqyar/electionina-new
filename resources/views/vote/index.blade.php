@@ -259,7 +259,7 @@
                 text: 'Pilih Tps'
             }));
             $.ajax({
-                url: '/get-tps', // Ganti dengan URL Anda
+                url: '/get-tpsvote', // Ganti dengan URL Anda
                 type: 'GET',
                 data: {
                     iddesa: selectedDesa
